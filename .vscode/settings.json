@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "https://www.schemastore.org/github-workflow.json": "file:///Users/fazozela/Desktop/Docencia/Modulo%205/github%20actions/cron-ticker/.github/workflows/ci-completo.yml"
+  }
+}
