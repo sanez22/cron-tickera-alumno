@@ -59,7 +59,7 @@ describe('getGreeting', () => {
 describe('divide', () => {
 
     test('debe dividir dos números', () => {
-        expect(divide(10, 2)).toBe(4);
+        expect(divide(10, 2)).toBe(5);
     });
 
     test('debe lanzar error al dividir entre cero', () => {
