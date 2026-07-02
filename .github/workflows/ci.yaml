@@ -3,7 +3,7 @@ name: CI Pipeline    #nombre visible en la pestaña de Actions
 on:    #eventos que dispara el workflow
 
   push:  # cuando alguien hace push
-    branches:[ main ] #...a la rama main
+    branches: [ main ] #...a la rama main
   
   pull_request:   #cuando alguien hace pull request (pr)
     branches: [ main ] #..... a la rama main
@@ -19,7 +19,7 @@ jobs:    #aca van todos los jobs
 
     steps:    #pasos en orden secuencial
       - name: Checkout Code  
-        uses: action/checkout@v4  #clona el repo en el runner
+        uses: actions/checkout@v4  #clona el repo en el runner
 
       - name: Setup Node.jobs
         uses: actions/setup-node@v4 # instala Node en el runner
