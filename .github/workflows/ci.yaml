@@ -22,7 +22,7 @@ jobs:
 
     # Variables a nivel del job
     env:
-    BUILD_DIR: dist
+      BUILD_DIR: dist
 
     steps:
       - uses: actions/checkout@v4
