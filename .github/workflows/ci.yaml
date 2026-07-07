@@ -35,6 +35,12 @@ jobs:
         run: |
           echo "App Version: ${{ vars.APP_VERSION }}"
 
+      # agregar la variable node version
+
+      - name: Show Github Node Version
+        run: |
+          echo "Node Version from Github variable ${{ var.NODE_VERSION }}"
+
       #Variables a nivel del step
       - name: Build
         run: npm run build
