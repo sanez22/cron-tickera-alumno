@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        witdh:
+        with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm ci
       - run: npm run lint
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions@checkout@v4
       - uses: actions/setup-node@v4
-        witdh:
+        with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm ci
       - name: Run tests with coverage
@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions@checkout@v4
       - uses: actions/setup-node@v4
-        witdh:
+        with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm CI
       - run: npm run build
