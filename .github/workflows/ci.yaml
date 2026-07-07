@@ -41,6 +41,10 @@ jobs:
         run: |
           echo "Node Version from Github variable ${{ vars.NODE_VERSION }}"
 
+      - name: Deploy API
+        run: | 
+          echo "Deploy with key ${{ secrets.API_KEY }}"
+
       #Variables a nivel del step
       - name: Build
         run: npm run build
