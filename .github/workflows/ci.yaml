@@ -1,52 +1,54 @@
-name: CI Pipeline    #nombre visible en la pestaña de Actions
+name: CI Pipeline Completo
 
-on:    #eventos que dispara el workflow
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-  push:  # cuando alguien hace push
-    branches: [ main ] #...a la rama main
-  
-  pull_request:   #cuando alguien hace pull request (pr)
-    branches: [ main ] #..... a la rama main
+  workflow_dispatch:
 
-  workflow_dispatch:   #permite ejecución manual desde la UI
-
-# Variables a nivel del workflow
 env:
-  NODE_VERSION: "20"
-  APP_NAME: cron-ticker
+  NODE_VERSION: '20'
 
 jobs:
 
-  build:
+  # =======JOB 1: LINT  ==================
+  lint:
+    name: lint
     runs-on: ubuntu-latest
-
-    # Variables a nivel del job
-    env:
-      BUILD_DIR: dist
-
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        witdh:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm ci
+      - run: npm run lint
 
-      - name: Show Variables
-        run: |
-          echo "App: ${{ env.APP_NAME }}, Node: ${{ env.NODE_VERSION }}"
-      
-      - name: Show Github Variables
-        run: |
-          echo "App Version: ${{ vars.APP_VERSION }}"
+  # =======JOB 2: TEST ==================
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions@checkout@v4
+      - uses: actions/setup-node@v4
+        witdh:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm ci
+      - name: Run tests with coverage
+        run: npm run test:coverage
 
-      # agregar la variable node version
-
-      - name: Show Github Node Version
-        run: |
-          echo "Node Version from Github variable ${{ vars.NODE_VERSION }}"
-
-      - name: Deploy API
-        run: | 
-          echo "Deploy with key ${{ secrets.API_KEY }}"
-
-      #Variables a nivel del step
-      - name: Build
-        run: npm run build
-        env:
-          APP_VERSION: '2.0.0'
+  # =======JOB 3: BUILD ==================
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions@checkout@v4
+      - uses: actions/setup-node@v4
+        witdh:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm CI
+      - run: npm run build
+    
